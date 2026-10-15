@@ -26,9 +26,11 @@ a = Analysis(
     hiddenimports=[
         "tkinter", "tkinter.ttk",
         "hls_converter", "folder_watcher", "ffmpeg_util", "publish", "appconfig",
-        # SFTP 上传器在运行时才 import paramiko，需显式声明以便打包
-        "paramiko", "paramiko.RSAKey", "paramiko.Ed25519Key",
-        "paramiko.ECDSAKey", "paramiko.DSSKey",
+        # SFTP 上传器在运行时才 import paramiko，需显式声明以便打包。
+        # 注意：只声明顶层 "paramiko" 即可 —— paramiko.RSAKey 等是类而非子模块，
+        # 写成 "paramiko.RSAKey" 会报 "Hidden import not found"。
+        # 加密后端（cryptography / bcrypt / nacl）由 PyInstaller 内置 hook 自动收集。
+        "paramiko",
     ],
     hookspath=[],
     runtime_hooks=[],

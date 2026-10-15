@@ -35,6 +35,9 @@ if (-not (Test-Path $VENV)) {
 $PIP = "$VENV/Scripts/python.exe"
 & $PIP -m pip install --upgrade pip | Out-Null
 & $PIP -m pip install pyinstaller | Out-Null
+# SFTP 上传依赖 paramiko（publish.py 运行时 import）。漏装会导致 exe 打包成功但上传功能在运行时报
+# ModuleNotFoundError，因此这里必须装。paramiko 会连带拉入 cryptography / bcrypt / pynacl / cffi。
+& $PIP -m pip install paramiko | Out-Null
 
 # 若 ffmpeg/ffmpeg.exe 存在则会被 build.spec 一并打包；否则提示用户手动放置。
 if (Test-Path "ffmpeg/ffmpeg.exe") {
