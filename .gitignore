@@ -1,0 +1,26 @@
+# ---- 转码器 ----
+transcoder/output/
+transcoder/source/
+transcoder/dist/
+transcoder/build/
+transcoder/.build/
+transcoder/__pycache__/
+*.pyc
+# ffmpeg 二进制不入库（体积大、按平台下载）
+transcoder/ffmpeg/*.exe
+
+# ---- Web 本地敏感/临时 ----
+web/config.local.php
+# 转码器本地覆盖配置（放 SSH 密码等敏感信息，不入库）
+transcoder/config.local.json
+# 生成的媒体清单（含你的 CDN 地址，按需保留）
+transcoder/output/manifest.json
+
+# ---- 系统 ----
+.DS_Store
+Thumbs.db
+*.log
+*.zip
+
+# ---- WorkBuddy 内部数据（不入库）----
+.workbuddy/

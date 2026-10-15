@@ -1,0 +1,40 @@
+{
+  "_说明": "StreamNest 转码器配置文件。改这个文件即可调整域名、上传、同步行为，无需改动代码。",
+
+  "site": {
+    "_说明": "前端站点域名（PHP 站点所在服务器，如 Serv00；示例值 site.example.com，部署时改你自己的域名）",
+    "base_url": "https://site.example.com",
+    "sync_endpoint": "https://site.example.com/sync.php",
+    "sync_token": ""
+  },
+
+  "media": {
+    "_说明": "媒体服务器域名（视频/封面/切片上传到这里，与前端不同域；本机是另一台服务器，无 FTP）",
+    "base_url": "https://cdn.example.com"
+  },
+
+  "convert": {
+    "_说明": "默认转码参数；命令行显式传参会覆盖这里",
+    "preset": "multi",
+    "seg_len": 6,
+    "poster": true,
+    "sprite": true
+  },
+
+  "upload": {
+    "_说明": "转码后上传媒体到 cdn.example.com。该服务器无 FTP，默认用 SFTP(SSH) 以密钥文件（key_file）登录、无需密码；若私钥有口令则填到 password 字段。method: sftp | ftp | none(只生成本地文件，手动上传)",
+    "enabled": false,
+    "method": "sftp",
+    "host": "",
+    "port": 22,
+    "user": "",
+    "password": "",
+    "key_file": "",
+    "remote_dir": "/var/www/media"
+  },
+
+  "sync": {
+    "_说明": "上传后是否自动把 manifest.json 推送到前端站点（需 site.sync_token 非空）",
+    "auto_sync": false
+  }
+}
